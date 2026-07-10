@@ -28,7 +28,7 @@ sbx policy allow network "ollama.com,*.ollama.com"
 
 ```shell
 # Tip: Change Directory (cd) to the directory where you want to run the Agent prior to running the command below
-sbx run shell --template warfront1ococds/ares-ollama-cloud-docker-sbx:latest
+sbx run shell --template warfront1aresocds/ares-ollama-cloud-docker-sbx:latest
 ```
 
 ## Want to contribute or modify this template?
