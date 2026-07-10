@@ -24,4 +24,3 @@ sbx template load ares-ollama-cloud-docker-sbx.tar
 sbx policy allow network "ollama.com,*.ollama.com"
 sbx run shell --template ares-ollama-cloud-docker-sbx:latest
 ```
-Once inside the sandbox shell, start Ares with `ares chat`.

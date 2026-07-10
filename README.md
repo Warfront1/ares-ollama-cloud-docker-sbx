@@ -31,10 +31,5 @@ sbx policy allow network "ollama.com,*.ollama.com"
 sbx run shell --template warfront1ococds/ares-ollama-cloud-docker-sbx:latest
 ```
 
-Once inside the sandbox shell, start Ares with:
-```shell
-ares chat
-```
-
 ## Want to contribute or modify this template?
 See [DEVELOPERS.md](DEVELOPERS.md).

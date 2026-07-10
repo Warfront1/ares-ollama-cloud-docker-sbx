@@ -17,4 +17,11 @@ RUN ln -sf /opt/ares/usr/lib/Ares/runtime/bin/node /usr/local/bin/ares-node \
 # Fallback placeholder. Ares reads OLLAMA_API_KEY directly from the environment.
 ENV OLLAMA_API_KEY="proxy-managed"
 
+# Auto-launch `ares chat` when an interactive shell starts, then fall back to the
+# shell once Ares exits. Guards prevent re-launching in nested/non-interactive shells.
+# Set ARES_NO_AUTOSTART=1 to skip auto-launch and get a plain shell.
+RUN printf '\n# Auto-launch Ares chat on interactive login\nif [ -z "$ARES_AUTOSTARTED" ] && [ -z "$ARES_NO_AUTOSTART" ] && [ -t 1 ]; then\n  export ARES_AUTOSTARTED=1\n  ares chat\nfi\n' >> /home/agent/.bashrc \
+ && printf '\n# Ensure interactive login shells source .bashrc (auto-launch Ares)\nif [ -n "$BASH_VERSION" ] && [ -f "$HOME/.bashrc" ]; then\n  . "$HOME/.bashrc"\nfi\n' >> /home/agent/.bash_profile \
+ && chown agent:agent /home/agent/.bashrc /home/agent/.bash_profile
+
 USER agent
